@@ -65,9 +65,7 @@ llm-fact-checker/
 
 ## 1️⃣ Create Virtual Environment
 ```bash
-python -m venv venv
-source venv/bin/activate     # Linux/Mac
-# Windows: venv\Scripts\activate
+conda create -n llmFactChecker python
 ```
 
 ---

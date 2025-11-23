@@ -1,4 +1,4 @@
-# Core Python libraries
+# Core
 pandas
 numpy
 tqdm
@@ -12,21 +12,19 @@ en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_
 sentence-transformers
 transformers
 
-# Vector Database
-faiss-cpu
-# If you prefer Chroma instead of FAISS:
-# chromadb
+# Vector Database (FAISS alternative for Windows)
+chromadb
 
-# LLM API (OpenAI)
+# LLM API
 openai
 
-# Web App (UI)
+# Web App
 streamlit
 
-# Utilities
-regex
+# ML utilities
 scikit-learn
+regex
 
-# Optional (for Jupyter notebooks)
+# Notebook (optional)
 jupyter
 notebook
