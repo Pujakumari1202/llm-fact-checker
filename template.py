@@ -1,36 +1,37 @@
 import os
 
-# Project Root Name
-
+# Project root
 project_name = "llm-fact-checker"
 
-
-# Folder Structure
-
+# Updated folder structure
 folders = [
     f"{project_name}/data",
     f"{project_name}/src",
-    f"{project_name}/notebooks",
+    f"{project_name}/llmfact",
+    f"{project_name}/chroma_db",   # chroma persistent DB
 ]
 
+# Updated file structure
 files = {
-    f"{project_name}/README.md": "# LLM Fact-Checking System\n",
+    f"{project_name}/README.md": "# LLM Fact-Checker (ChromaDB + HuggingFace)\n",
     f"{project_name}/requirements.txt": "",
     f"{project_name}/data/facts.csv": "id,source_url,source_date,statement,plain_text\n",
-    f"{project_name}/notebooks/demo.ipynb": "",
-    f"{project_name}/src/__init__.py": "",
-    f"{project_name}/src/ingest.py": "",
-    f"{project_name}/src/nlp.py": "",
+
+    # src files
+    f"{project_name}/src/embedder.py": "",
     f"{project_name}/src/retriever.py": "",
     f"{project_name}/src/llm_compare.py": "",
     f"{project_name}/src/pipeline.py": "",
-    f"{project_name}/src/app.py": "",
-    f"{project_name}/.env": "OPENAI_API_KEY=\n",
+    f"{project_name}/src/__init__.py": "",
+
+    # Streamlit UI
+    f"{project_name}/llmfact/app.py": "",
+
+    # env (HuggingFace key)
+    f"{project_name}/.env": "HF_API_KEY=\nHF_MODEL=mistralai/Mistral-7B-Instruct\n",
 }
 
-
-# Create Folders (Skip if Exists)
-
+# Create folders
 for folder in folders:
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -38,9 +39,7 @@ for folder in folders:
     else:
         print(f"[!] Folder already exists, skipped: {folder}")
 
-
-# Create Files (Skip if Exists)
-
+# Create files
 for filepath, content in files.items():
     if not os.path.exists(filepath):
         with open(filepath, "w", encoding="utf-8") as f:
