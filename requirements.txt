@@ -5,17 +5,22 @@ tqdm
 python-dotenv
 
 # NLP
-spacy
+spacy==3.7.2
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 
 # Embeddings & Transformers
-sentence-transformers
-transformers
+sentence-transformers==2.2.2
+transformers==4.36.2
 
-# Vector Database (FAISS alternative for Windows)
+# Fix meta-tensor issue — requires compatible PyTorch
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+
+# Vector Store (instead of FAISS for Windows)
 chromadb
 
-# LLM API
+# LLM API (if needed later)
 openai
 
 # Web App
@@ -25,6 +30,6 @@ streamlit
 scikit-learn
 regex
 
-# Notebook (optional)
+# Notebooks (optional)
 jupyter
 notebook
