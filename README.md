@@ -1,62 +1,67 @@
 # 🔍 LLM Fact-Checking System  
 ### 🧠 Machine Learning Engineer – LLM Task Assignment
 
-A lightweight **LLM-powered Fact Verification System** that extracts claims, retrieves factual evidence, and classifies each claim as **True**, **False**, or **Unverifiable** using a Retrieval-Augmented Generation (RAG) pipeline.
+A lightweight **LLM-powered Fact Verification System** that takes a claim, retrieves factual evidence, and classifies it as **Likely True**, **Likely False**, or **Unverifiable** using a Retrieval-Augmented Generation (RAG) pipeline.
 
-This project is built as per the task instructions from:  
-📄 *Machine Learning Engineer – LLM Task Assignment* (provided in the challenge)
+This project was built for the task described in the provided assignment PDF:  
+`file:///mnt/data/Machine Learning Engineer – LLM Task Assignment.pdf`
+
+---
+
+## 🌟 Features
+
+- 📝 Simple claim input (user-provided)
+- 📚 Trusted fact base ingestion (`data/facts.csv`)
+- 🔍 Semantic Top-K retrieval using **ChromaDB**
+- 🧠 Sentence embeddings via `all-MiniLM-L6-v2`
+- 🤖 LLM reasoning & classification via HuggingFace Inference API
+- 📦 Structured JSON output: `{ "verdict", "evidence", "reasoning" }`
+- 🖥️ Streamlit UI for interactive checks
 
 ---
 
-# 🌟 Features
-
-- ✂️ **Automatic Claim Extraction** using NLP  
-- 📚 **Trusted Fact Base** ingestion (CSV → chunks → embeddings)  
-- 🔍 **Top-K Retrieval** using FAISS / Chroma  
-- 🤖 **LLM-based Comparison** with structured JSON outputs  
-- ⚡ Deterministic prompt (temperature = 0) for accuracy  
-- 🖥️ **Streamlit UI** for interactive fact-checking  
-- 🧪 Testable pipeline (E2E claim → retrieval → verdict)
-
----
 
 # 🛠️ Tech Stack
 
 | Layer | Tools |
-|------|-------|
+|-------|--------|
 | **Language** | Python 🐍 |
-| **NLP** | spaCy, Transformers |
-| **Embeddings** | Sentence-Transformers |
-| **Vector DB** | FAISS / Chroma |
-| **LLM** | OpenAI GPT-4o / GPT-4o-mini (configurable) |
+| **NLP** | spaCy (en_core_web_sm) |
+| **Embeddings** | Sentence-Transformers (all-MiniLM-L6-v2) |
+| **Vector DB** | ChromaDB |
+| **LLM (API)** | HuggingFace Inference API (Mistral-7B-Instruct or any free model) |
 | **UI** | Streamlit |
-| **Data** | Custom facts.csv (trusted dataset) |
+| **Dataset** | Custom `facts.csv` (trusted fact base) |
+| **Environment** | Conda + `.env` secrets |
+| **Utilities** | pandas, numpy, tqdm |
+
 
 ---
+
 
 # 📂 Project Structure
 
 ```
 llm-fact-checker/
 │
-├── data/
-│   ├── facts.csv
-│   ├── faiss.index
-│   └── meta.pkl
+├── llmfact/
+│   └── app.py
 │
 ├── src/
-│   ├── ingest.py
-│   ├── nlp.py
+│   ├── embedder.py
 │   ├── retriever.py
 │   ├── llm_compare.py
 │   ├── pipeline.py
-│   └── app.py
+│   └── __init__.py
 │
-├── notebooks/
-│   └── demo.ipynb
+├── data/
+│   └── facts.csv
 │
-├── requirements.txt
-└── README.md
+│
+├── .env
+├── README.md
+└── requirements.txt
+
 ```
 
 ---
@@ -65,7 +70,9 @@ llm-fact-checker/
 
 ## 1️⃣ Create Virtual Environment
 ```bash
-conda create -n llmFactChecker python
+conda create -n llmFactChecker python=3.10 -y
+
+
 ```
 
 ---
@@ -78,20 +85,11 @@ python -m spacy download en_core_web_sm
 
 ---
 
-## 3️⃣ Build Vector Index (Embeddings)
+
+## 3 Run the Fact-Checking App (Streamlit)
 ```bash
-python src/ingest.py
-```
-This generates:
+streamlit run app.py
 
-- `data/faiss.index`  
-- `data/meta.pkl`
-
----
-
-## 4️⃣ Run the Fact-Checking App (Streamlit)
-```bash
-streamlit run src/app.py
 ```
 
 Open in browser → **http://localhost:8501**
